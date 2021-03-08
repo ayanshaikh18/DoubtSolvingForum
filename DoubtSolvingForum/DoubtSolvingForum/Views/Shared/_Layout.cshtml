@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+@inject SignInManager<IdentityUser> signInManager;
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            background: #f3f3f3;
+        }
+    </style>
+    @RenderSection("HeadContent", required: false)
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-white navbar-light shadow sticky-top">
+        <div class="navbar-brand justify-content-center" href="#">
+            <i class="material-icons prefix">question_answer</i>
+            QnA Forum
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto" id="nav">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <form method="post" asp-controller="Account" asp-action="logout">
+                            <button type="submit"
+                                    class="nav-link btn btn-link py-0">
+                                <i class="fa fa-power-off"></i> &nbsp;
+                                <span class="nav-font-own">Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Sign Up</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted shadow-lg box-shadow bg-light">
+        <div class="container text-center">
+            &copy; 2021 - QnA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+

@@ -1,0 +1,45 @@
+﻿@model DoubtSolvingForum.ViewModels.LoginViewModel
+<br />
+<br />
+<div class="row mt-5">
+    <div class="col-sm-12 col-md-3"></div>
+    <div class="col-sm-12 col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="text-center h4 font-weight-bold card-title">
+                    Login
+                </div>
+                <form method="post">
+                    <div class="">
+                        <div class="red-text center" asp-validation-summary="All">
+                        </div>
+                        <div class="input-group flex-nowrap mt-4">
+                            <span class="input-group-text">
+                                <i class="material-icons prefix">account_circle</i>
+                            </span>
+                            <input required asp-for="Username" placeholder="Username" class="form-control">
+                            <span asp-validation-for="Username" class="red-text"></span>
+                        </div>
+                        <div class="input-group flex-nowrap mt-4">
+                            <span class="input-group-text">
+                                <i class="material-icons prefix">lock_outline</i>
+                            </span>
+                            <input required asp-for="Password" placeholder="Password" class="form-control">
+                            <span asp-validation-for="Password" class="red-text"></span>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"
+                                    type="submit" name="action">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-3"></div>
+</div>
+<br />
+<br />
