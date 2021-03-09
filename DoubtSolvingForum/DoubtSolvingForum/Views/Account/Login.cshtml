@@ -11,21 +11,29 @@
                 </div>
                 <form method="post">
                     <div class="">
-                        <div class="red-text center" asp-validation-summary="All">
+                        <div class="text-danger text-center font-weight-bold" asp-validation-summary="All">
                         </div>
                         <div class="input-group flex-nowrap mt-4">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">account_circle</i>
-                            </span>
+                            </div>
                             <input required asp-for="Username" placeholder="Username" class="form-control">
-                            <span asp-validation-for="Username" class="red-text"></span>
+                            <div asp-validation-for="Username" class="text-danger"></div>
                         </div>
                         <div class="input-group flex-nowrap mt-4">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">lock_outline</i>
-                            </span>
+                            </div>
                             <input required asp-for="Password" placeholder="Password" class="form-control">
-                            <span asp-validation-for="Password" class="red-text"></span>
+                            <div asp-validation-for="Password" class="text-danger"></div>
+                        </div>
+                        <div class="input-group mt-4">
+                            <div class="custom-checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m=>m.RememberMe)
+                                </label>
+                            </div>
                         </div>
                         <div class="text-center mt-4">
                             <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"

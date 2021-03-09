@@ -59,7 +59,7 @@ namespace DoubtSolvingForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password,isPersistent:false,false);
+                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password,isPersistent:model.RememberMe,false);
                 if (result.Succeeded)
                 {
                     var user = await userManager.FindByNameAsync(model.Username);
@@ -68,7 +68,7 @@ namespace DoubtSolvingForum.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("list", "question");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }

@@ -36,6 +36,7 @@ namespace DoubtSolvingForum
             services.AddControllersWithViews();
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,5 +16,7 @@ namespace DoubtSolvingForum.Models
         public IdentityUser User { get; set; }
         [Required]
         public string QuestionText { get; set; }
+
+        public IEnumerable<Answer> Answers { get; set; }
     }
 }

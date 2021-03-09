@@ -32,7 +32,15 @@ namespace DoubtSolvingForum.Models
 
         public IEnumerable<Question> GetQuestions()
         {
-            return context.Questions.ToList();
+            var questions = context.Questions.Select(q => new Question
+            {
+                QuestionText = q.QuestionText,
+                Title = q.Title,
+                Id = q.Id,
+                UserId = q.UserId,
+                Answers = context.Answers.Where(a => a.QuestionId == q.Id).ToList()
+            });
+            return questions.ToList();
         }
 
         public Question Update(Question question)

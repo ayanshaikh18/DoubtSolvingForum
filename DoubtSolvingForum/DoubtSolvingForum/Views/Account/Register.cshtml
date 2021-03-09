@@ -10,35 +10,37 @@
                 </div>
                 <form method="post">
                     <div class="">
-                        <div class="red-text center" asp-validation-summary="All">
+                        <div class="text-danger text-center">
+                            <div class="font-weight-bold" asp-validation-summary="All">
+                            </div>
                         </div>
                         <div class="input-group flex-nowrap">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">email</i>
-                            </span>
+                            </div>
                             <input required asp-for="Email" placeholder="Enter Email" class="form-control">
-                            <span asp-validation-for="Email" class="red-text"></span>
+                            <div asp-validation-for="Email" class="text-danger"></div>
                         </div>
                         <div class="input-group flex-nowrap mt-4">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">account_circle</i>
-                            </span>
+                            </div>
                             <input required asp-for="Username" placeholder="Username" class="form-control">
-                            <span asp-validation-for="Username" class="red-text"></span>
+                            <div asp-validation-for="Username" class="text-danger"></div>
                         </div>
                         <div class="input-group flex-nowrap mt-4">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">lock_outline</i>
-                            </span>
+                            </div>
                             <input required asp-for="Password" placeholder="Password" class="form-control">
-                            <span asp-validation-for="Password" class="red-text"></span>
+                            <div asp-validation-for="Password" class="text-danger"></div>
                         </div>
                         <div class="input-group flex-nowrap mt-4">
-                            <span class="input-group-text">
+                            <div class="input-group-text">
                                 <i class="material-icons prefix">lock</i>
-                            </span>
+                            </div>
                             <input placeholder="Confirm Password" required asp-for="ConfirmPassword" class="form-control">
-                            <span asp-validation-for="ConfirmPassword" class="helper-text red-text"></span>
+                            <div asp-validation-for="ConfirmPassword" class="text-danger"></div>
                         </div>
                         <div class="text-center mt-4">
                             <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"

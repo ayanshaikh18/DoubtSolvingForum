@@ -1,4 +1,5 @@
-﻿@model Question
+﻿@model ViewQuestionViewModel
+@inject UserManager<IdentityUser> userManager;
 
 @section HeadContent
 {
@@ -8,25 +9,72 @@
                 width: 100% !important;
             }
         }
-        .jumbotron{
-            padding:5px !important;
+
+        .jumbotron {
+            padding: 5px !important;
         }
     </style>
+    <!--Markdown CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 }
-<div class="card w-75 mx-md-auto mt-5">
+
+<div class="card shadow w-75 mx-md-auto mt-5">
     <div class="card-body">
         <div class="row">
             <div class="col-sm-12">
-                <div class="font-weight-bold h3">@Model.Title</div>
+                <div class="font-weight-bold h3">@Model.Question.Title</div>
                 <div class="text-muted">
-                    Asked By :- @Model.User.UserName
+                    Asked By :- @Model.Question.User.UserName
                 </div>
             </div>
         </div>
         <hr />
         <div class="row mt-5">
             <div class="col-sm-12">
-                <div id="question">@Markdown.ParseHtmlString(Model.QuestionText)</div>
+                <div id="question">@Markdown.ParseHtmlString(Model.Question.QuestionText)</div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="h4 font-weight-bold col-sm-12">
+                @Model.Answers.Count() Answers
+            </div>
+            @foreach (var answer in Model.Answers)
+            {
+                <div class="col-md-1 col-sm-auto h4">
+                    <div class="mt-md-3">
+                        ▲ <br />
+                        10 <br />
+                        ▼
+                    </div>
+                </div>
+                <div class="p-2 col-sm-11 col-md-11">
+                    @Markdown.ParseHtmlString(answer.AnswerText)
+                </div>
+
+                <div class="col-sm-12 h5 text-muted">
+                    Answered by @answer.User.UserName
+                    <hr />
+                </div>
+            }
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12 font-weight-bold h5">
+                Your Answer
+            </div>
+            <div class="col-sm-12">
+                <form method="post" asp-action="PostAnswer" novalidate>
+                    <input type="hidden" asp-for="MyAnswer" />
+                    <input type="hidden" asp-for="QuestionId" value="@Model.Question.Id" />
+                    <div class="form-group">
+                        <textarea id="MDDescription" type="text" rows="0" cols="50"
+                                  name="MDDescription" value="" required></textarea>
+                    </div>
+                    <div class="form-group float-right">
+                        <button type="submit" id="submitBtn" class="btn btn-lg btn-primary">Post</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -39,6 +87,21 @@
         $(document).ready(function () {
             $("pre").addClass("jumbotron")
             $("code").addClass("p-0")
+
+            let simpleMDE = new SimpleMDE({
+                element: document.getElementById("MDDescription"),
+                toolbar: ["bold", "italic", "heading", "preview"],
+            });
+
+            //passing data to the hidden field in the form
+            function validate() {
+                console.log(document.getElementById("MyAnswer").value);
+                document.getElementById("MyAnswer").value = simpleMDE.value();
+                console.log($("#MyAnswer").val());
+                return true
+            }
+
+            $("#submitBtn").click(validate);
         })
     </script>
 }

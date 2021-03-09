@@ -1,26 +1,57 @@
 ﻿@model QuestionListViewModel
 
+@section HeadContent
+{
+    <style>
+        .card:hover {
+            background-color: lightgrey;
+        }
+
+        a, a:hover {
+            text-decoration: none;
+        }
+    </style>
+}
+
 <div class="row mt-5">
     <div class="col-sm-12">
-        <div class="font-weight-bold h3">All Questions</div>
+        <div class="font-weight-bold h3">
+            @if (ViewBag.searchString != null)
+            {
+                <text>Questions Containing "</text> @ViewBag.searchString <text>"</text>
+            }
+            else if (ViewBag.myQuestions == true)
+            {
+                <text>Questions Asked by Me</text>
+            }
+            else
+            {
+                <text>All Questions</text>
+            }
+        </div>
     </div>
     <div class="col-sm-12" style="text-align:right">
         <a asp-controller="Question" asp-action="NewQuestion" class="btn btn-primary">Ask a Question</a>
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                @foreach (var question in Model.Questions)
-                {
-                    <a asp-controller="Question" asp-action="view" asp-route-id="@question.Id">
+<div class="row">
+    @foreach (var question in Model.Questions)
+    {
+        <div class="col-sm-12">
+            <a asp-controller="Question" asp-action="view" asp-route-id="@question.Id">
+                <div class="card mt-3">
+                    <div class="card-body">
+
                         <div class="font-weight-bold h4 text-primary">@question.Title</div>
-                    </a>
-                    <hr />
-                }
-            </div>
+
+                        <div class="text-muted">
+                            <h5>@question.Answers.Count() Answers</h5>
+                            <h6>Asked By :- @question.User.UserName</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
+    }
 </div>
