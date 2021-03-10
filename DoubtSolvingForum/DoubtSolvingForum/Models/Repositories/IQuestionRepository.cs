@@ -9,7 +9,7 @@ namespace DoubtSolvingForum.Models.Repositories
     {
         Question Add(Question question);
         Question GetQuestion(int id);
-        IEnumerable<Question> GetQuestions();
+        IList<Question> GetQuestions();
         Question Update(Question question);
         Question Delete(int id);
     }

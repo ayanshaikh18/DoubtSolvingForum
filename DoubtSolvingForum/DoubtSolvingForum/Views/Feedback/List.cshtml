@@ -1,0 +1,85 @@
+﻿@model FeedbackListViewModel
+@inject UserManager<IdentityUser> userManager;
+
+
+<div class="row mt-5">
+    <div class="col-sm-12">
+        <h3 class="font-weight-bold">Feedbacks</h3>
+    </div>
+    <div class="col-sm-12">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                Give Feedback
+            </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Give Feedback</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="feedbackForm" method="post" asp-action="PostFeedback">
+                            <div class="form-group mt-2">
+                                <textarea required rows="3" placeholder="Enter Your Feedback" class="form-control" asp-for="FeedbackText"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" form="feedbackForm" class="btn btn-primary">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="row">
+            @foreach (var feedback in Model.Feedbacks)
+            {
+                var id = "f" + feedback.Id;
+                <div class="col-sm-12 p-2">
+                    <div class="h5 text-muted">@feedback.User.UserName</div>
+                    @feedback.Text <br />
+                    @foreach (var reply in feedback.FeedbackReplies)
+                    {
+                        <div class="ml-5 mt-3">
+                            <div class="h6 text-muted">
+                                Admin
+                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            </div>
+                            
+                            <div>@reply.Reply</div>
+                        </div>
+                    }
+                    @if (Model.IsAdmin)
+                    {
+                        <a data-toggle="collapse" href="#@id" role="button" class="font-weight-bold mt-3"
+                           aria-expanded="false" aria-controls="collapseExample">
+                            Reply
+                        </a>
+                        <div class="collapse mt-2" id="@id">
+                            <form method="post" asp-action="PostReply" asp-controller="feedback">
+                                <input type="hidden" name="fid" value="@feedback.Id" />
+                                <div class="form-group">
+                                    <textarea class="form-control" name="feedbackText" required placeholder="Reply..."></textarea>
+                                </div>
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-primary">Post</button>
+                                </div>
+                                <br />
+                            </form>
+                        </div>
+                    }
+                    <hr />
+                </div>
+            }
+        </div>
+    </div>
+</div>

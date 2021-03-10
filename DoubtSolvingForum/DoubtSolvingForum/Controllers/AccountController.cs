@@ -78,6 +78,7 @@ namespace DoubtSolvingForum.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+
             await signInManager.SignOutAsync();
             return RedirectToAction("login");
         }

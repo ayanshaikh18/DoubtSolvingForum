@@ -22,7 +22,13 @@ namespace DoubtSolvingForum.Models
 
         public Question Delete(int id)
         {
-            throw new NotImplementedException();
+            var question = context.Questions.Find(id);
+            if (question != null)
+            {
+                context.Questions.Remove(question);
+                context.SaveChanges();
+            }
+            return question;
         }
 
         public Question GetQuestion(int id)
@@ -30,7 +36,7 @@ namespace DoubtSolvingForum.Models
             return context.Questions.Where(q => q.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<Question> GetQuestions()
+        public IList<Question> GetQuestions()
         {
             var questions = context.Questions.Select(q => new Question
             {
@@ -45,7 +51,10 @@ namespace DoubtSolvingForum.Models
 
         public Question Update(Question question)
         {
-            throw new NotImplementedException();
+            var que = context.Questions.Attach(question);
+            que.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return question;
         }
     }
 }

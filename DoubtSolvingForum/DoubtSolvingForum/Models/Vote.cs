@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DoubtSolvingForum.Models
 {
-    public class Answer
+    public class Vote
     {
         public int Id { get; set; }
-        public int QuestionId { get; set; }
-        public Question Question { get; set; }
-        public string AnswerText { get; set; }
+        public int AnswerId { get; set; }
+        public Answer Answer { get; set; }
+        public bool IsUpVoted { get; set; }
+        public bool IsDownVoted { get; set; }
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
-        public IEnumerable<Vote> Votes { get; set; }
     }
 }

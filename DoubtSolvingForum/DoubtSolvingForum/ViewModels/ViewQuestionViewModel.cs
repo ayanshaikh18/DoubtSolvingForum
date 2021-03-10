@@ -12,5 +12,6 @@ namespace DoubtSolvingForum.ViewModels
         public Question Question { get; set; }
         public IEnumerable<Answer> Answers { get; set; }
         public string MyAnswer { get; set; }
+        public string UserId { get; set; }
     }
 }

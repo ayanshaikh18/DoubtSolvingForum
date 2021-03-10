@@ -9,6 +9,10 @@ namespace DoubtSolvingForum.Models.Repositories
     {
         Answer Add(Answer answer);
         IEnumerable<Answer> GetAnswers(int qid);
-
+        Answer GetAnswer(int id);
+        void DeleteAnswer(int id);
+        Answer Update(Answer answer);
+        Vote VoteAnswer(Vote vote);
+        void DeleteVoteByUserId(string userId);
     }
 }

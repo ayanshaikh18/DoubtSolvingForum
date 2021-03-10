@@ -1,4 +1,4 @@
-﻿@model QuestionListViewModel
+﻿@model PaginatedList<Question>
 
 @section HeadContent
 {
@@ -12,7 +12,13 @@
         }
     </style>
 }
+<div id="toa" class="position-fixed justify-content-center align-items-center p-3" style="z-index: 5; right: 40%;top:1 !important">
+    <div id="liveToast" class="shadow w-100 toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
 
+        <div id="notification" class="font-weight-bold text-success toast-body">
+        </div>
+    </div>
+</div>
 <div class="row mt-5">
     <div class="col-sm-12">
         <div class="font-weight-bold h3">
@@ -36,7 +42,7 @@
 </div>
 
 <div class="row">
-    @foreach (var question in Model.Questions)
+    @foreach (var question in Model)
     {
         <div class="col-sm-12">
             <a asp-controller="Question" asp-action="view" asp-route-id="@question.Id">
@@ -55,3 +61,39 @@
         </div>
     }
 </div>
+<div class="row mt-5 text-center">
+    <div class="col-sm-12">
+        <nav aria-label="...">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <ul class="pagination pagination-lg justify-content-center">
+                <li class="page-item @prevDisabled">
+                    <a class="page-link" tabindex="-1" asp-action="list" asp-route-pageNumber="@(Model.PageIndex-1)" aria-disabled="true">Previous</a>
+                </li>
+                @for (var i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item"><a asp-action="list" asp-route-pageNumber="@i" class="page-link">@i</a></li>
+                }
+                <li class="page-item @nextDisabled">
+                    <a class="page-link" asp-action="list" asp-route-pageNumber="@(Model.PageIndex+1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    @if (ViewBag.notification != null)
+    {
+        <script>
+            $(document).ready(function () {
+                $("#notification").text('@ViewBag.notification')
+                $("#liveToast").toast('show')
+            })
+        </script>
+    }
+}
