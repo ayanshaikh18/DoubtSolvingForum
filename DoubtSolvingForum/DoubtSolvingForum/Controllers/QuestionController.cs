@@ -90,7 +90,13 @@ namespace DoubtSolvingForum.Controllers
             }
             model.Answers = answers;
             var user = await userManager.GetUserAsync(HttpContext.User);
-            model.UserId = user.Id; if (notification != null)
+            model.UserId = user.Id;
+            if (await userManager.IsInRoleAsync(user, "Admin"))
+                model.IsAdmin = true;
+            else
+                model.IsAdmin = false;
+
+            if (notification != null)
             {
                 ViewBag.notification = notification;
             }

@@ -30,9 +30,11 @@
 
 <body>
     <nav class="navbar navbar-expand-md bg-white navbar-light shadow sticky-top">
-        <div class="navbar-brand font-weight-bold" href="#">
-            <i class="material-icons prefix">question_answer</i>
-            QnA Forum
+        <div class="navbar-brand font-weight-bold">
+            <a asp-action="index" asp-controller="home" class="text-dark">
+                <i class="material-icons prefix">question_answer</i>
+                QnA Forum
+            </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -91,7 +93,7 @@
     </div>
     <footer class="border-top footer shadow bg-dark text-light">
         <div class="container text-center">
-            &copy; 2021 - QnA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            Copyright &copy; 2021 - QnA - <a asp-area="" class="text-light" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="https://use.fontawesome.com/a3df2a278d.js"></script>

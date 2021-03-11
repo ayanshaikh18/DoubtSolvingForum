@@ -39,7 +39,7 @@
                     Asked By :- @Model.Question.User.UserName
                 </div>
             </div>
-            @if (Model.Question.UserId == Model.UserId)
+            @if (Model.Question.UserId == Model.UserId || Model.IsAdmin)
             {
                 <div style="text-align:right" class="col-sm-12">
                     <a asp-action="edit" asp-controller="question" class="btn btn-secondary"
@@ -97,21 +97,30 @@
                     <div class="mt-md-3">
                         @if (hasUpVoted == 1)
                         {
-                            <a asp-action="VoteAnswer" class="text-success disabled" asp-route-ansId="@answer.Id" asp-route-IsUpVoted="true">▲</a><br />
+                            <a asp-action="VoteAnswer" class="text-success disabled" 
+                               asp-route-ansId="@answer.Id" asp-route-IsUpVoted="true">▲</a><br />
                             @votes <br />
-                            <a asp-action="DeleteVote" class="text-dark" asp-route-qid="@answer.QuestionId">▼</a>
+                            <a asp-action="DeleteVote" class="text-dark" 
+                               data-bs-toggle="tooltip" data-bs-placement="right" title="Cancel Your Vote"
+                               asp-route-qid="@answer.QuestionId">▼</a>
                         }
                         else if (hasDownVoted == 1)
                         {
-                            <a asp-action="DeleteVote" class="text-dark" asp-route-qid="@answer.QuestionId">▲</a><br />
+                            <a asp-action="DeleteVote" class="text-dark" 
+                               data-bs-toggle="tooltip" data-bs-placement="right" title="Cancel Your Vote"
+                               asp-route-qid="@answer.QuestionId">▲</a><br />
                             @votes <br />
                             <a asp-action="VoteAnswer" class="text-danger disabled" asp-route-ansId="@answer.Id" asp-route-IsDownVoted="true">▼</a>
                         }
                         else
                         {
-                            <a asp-action="VoteAnswer" class="text-dark" asp-route-ansId="@answer.Id" asp-route-IsUpVoted="true">▲</a><br />
+                            <a asp-action="VoteAnswer" class="text-dark" 
+                               data-bs-toggle="tooltip" data-bs-placement="right" title="Up-Vote this answer"
+                               asp-route-ansId="@answer.Id" asp-route-IsUpVoted="true">▲</a><br />
                             @votes <br />
-                            <a asp-action="VoteAnswer" class="text-dark" asp-route-ansId="@answer.Id" asp-route-IsDownVoted="true">▼</a>
+                            <a asp-action="VoteAnswer" class="text-dark" 
+                               data-bs-toggle="tooltip" data-bs-placement="right" title="Down-vote this answer"
+                               asp-route-ansId="@answer.Id" asp-route-IsDownVoted="true">▼</a>
                         }
 
                     </div>
@@ -119,11 +128,11 @@
                 <div class="p-2 col-sm-11 col-md-11">
                     @Markdown.ParseHtmlString(answer.AnswerText)
                     
-                    @if (answer.UserId == Model.UserId) 
+                    @if (answer.UserId == Model.UserId || Model.IsAdmin) 
                     {
                         <a asp-action="EditAnswer" asp-route-id="@answer.Id">Edit Answer</a> <text>|</text>
                         <a href="#" class="deleteBtn" ansId="@answer.Id" data-toggle="modal" data-target="#deleteAnsModal">Delete Answer</a>
-                        <br />
+                        <br /><br />
                     }
                 </div>
                 <div class="col-sm-12 h5 text-muted">

@@ -31,7 +31,8 @@ namespace DoubtSolvingForum
                 options => options.UseSqlServer(Configuration.GetConnectionString("DoubtSolvingForumDb")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
 

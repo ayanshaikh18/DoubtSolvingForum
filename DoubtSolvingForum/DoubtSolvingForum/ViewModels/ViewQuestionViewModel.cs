@@ -13,5 +13,6 @@ namespace DoubtSolvingForum.ViewModels
         public IEnumerable<Answer> Answers { get; set; }
         public string MyAnswer { get; set; }
         public string UserId { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }
