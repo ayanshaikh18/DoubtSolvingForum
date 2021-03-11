@@ -1,51 +1,69 @@
 ﻿@model DoubtSolvingForum.ViewModels.LoginViewModel
-<br />
+
+@section HeadContent
+{
+    <style>
+        @@media (max-width: 768px) {
+            .card {
+                width: 100% !important;
+            }
+        }
+    </style>
+}
+
 <br />
 <div class="row mt-5">
     <div class="col-sm-12 col-md-3"></div>
-    <div class="col-sm-12 col-md-6">
-        <div class="card shadow">
-            <div class="card-body">
-                <div class="text-center h4 font-weight-bold card-title">
-                    Login
-                </div>
-                <form method="post">
-                    <div class="">
-                        <div class="text-danger text-center font-weight-bold" asp-validation-summary="All">
-                        </div>
-                        <div class="input-group flex-nowrap mt-4">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">account_circle</i>
-                            </div>
-                            <input required asp-for="Username" placeholder="Username" class="form-control">
-                            <div asp-validation-for="Username" class="text-danger"></div>
-                        </div>
-                        <div class="input-group flex-nowrap mt-4">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">lock_outline</i>
-                            </div>
-                            <input required asp-for="Password" placeholder="Password" class="form-control">
-                            <div asp-validation-for="Password" class="text-danger"></div>
-                        </div>
-                        <div class="input-group mt-4">
-                            <div class="custom-checkbox">
-                                <label asp-for="RememberMe">
-                                    <input asp-for="RememberMe" />
-                                    @Html.DisplayNameFor(m=>m.RememberMe)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"
-                                    type="submit" name="action">
-                                Login
-                            </button>
-                        </div>
-                        <div class="input-group mt-2">
-                            <a asp-action="forgotpassword" asp-controller="account">Forgot Password ?</a>
-                        </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="card shadow w-75 mx-auto">
+            <div class="card-body row">
+                <div class="d-none d-lg-block col-lg-6">
+                    <div class="flex-grow-1 bg-login-image">
+                        <img src="~/images/image2.jpg" style="height:100%;width:100%" class="mt-3 p-3 img-fluid">
                     </div>
-                </form>
+                </div>
+                <div class="col-lg-6 align-middle">
+                    <div class="mt-lg-3 text-center h4 font-weight-bold card-title">
+                        Login
+                    </div>
+                    <form method="post">
+                        <div class="">
+                            <div class="text-danger text-center font-weight-bold" asp-validation-summary="All">
+                            </div>
+                            <div class="input-group flex-nowrap mt-4">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">account_circle</i>
+                                </div>
+                                <input required asp-for="Username" placeholder="Username" class="form-control">
+                                <div asp-validation-for="Username" class="text-danger"></div>
+                            </div>
+                            <div class="input-group flex-nowrap mt-4">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">lock_outline</i>
+                                </div>
+                                <input required asp-for="Password" placeholder="Password" class="form-control">
+                                <div asp-validation-for="Password" class="text-danger"></div>
+                            </div>
+                            <div class="input-group mt-4">
+                                <div class="custom-checkbox">
+                                    <label asp-for="RememberMe">
+                                        <input asp-for="RememberMe" />
+                                        @Html.DisplayNameFor(m => m.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"
+                                        type="submit" name="action">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="input-group mt-2">
+                                <a asp-action="forgotpassword" asp-controller="account">Forgot Password ?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>

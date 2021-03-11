@@ -147,7 +147,7 @@ namespace DoubtSolvingForum.Controllers
             var user = await userManager.GetUserAsync(HttpContext.User);
             var question = questionRepository.GetQuestion(id);
             if (question.UserId != user.Id)
-                return View("AccessDenied");
+                return View("AccessDenied","Account");
             return View(question);
         }
 
@@ -169,7 +169,7 @@ namespace DoubtSolvingForum.Controllers
             var user = await userManager.GetUserAsync(HttpContext.User);
             var question = questionRepository.GetQuestion(id);
             if (question.UserId != user.Id)
-                return View("AccessDenied");
+                return View("AccessDenied","Account");
             questionRepository.Delete(id);
             return RedirectToAction("list", "question",new { notification = "Question Deleted Successfully!!!"});
         }
@@ -180,7 +180,7 @@ namespace DoubtSolvingForum.Controllers
             var user = await userManager.GetUserAsync(HttpContext.User);
             var answer = answerRepository.GetAnswer(id);
             if (answer.UserId != user.Id)
-                return View("AccessDenied");
+                return View("AccessDenied","Account");
             answer.Question = questionRepository.GetQuestion(answer.QuestionId);
             return View("EditAnswer", answer);
         }
@@ -203,7 +203,7 @@ namespace DoubtSolvingForum.Controllers
             var user = await userManager.GetUserAsync(HttpContext.User);
             var answer = answerRepository.GetAnswer(id);
             if (answer.UserId != user.Id)
-                return View("AccessDenied");
+                return View("AccessDenied","Account");
             answerRepository.DeleteAnswer(id);
             return RedirectToAction("view", "question", new { id = answer.QuestionId, notification = "Answer Deleted Successfully!!!" });
         }

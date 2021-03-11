@@ -1,5 +1,7 @@
-﻿using DoubtSolvingForum.ViewModels;
+﻿using DoubtSolvingForum.Models.Repositories;
+using DoubtSolvingForum.ViewModels;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
@@ -14,11 +16,17 @@ namespace DoubtSolvingForum.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IQuestionRepository questionRepository;
+        private readonly IAnswerRepository answerRepository;
         public AccountController(UserManager<IdentityUser> userManager,
-                                 SignInManager<IdentityUser> signInManager)
+                                 SignInManager<IdentityUser> signInManager,
+                                 IQuestionRepository questionRepository,
+                                 IAnswerRepository answerRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.questionRepository = questionRepository;
+            this.answerRepository = answerRepository;
         }
         [HttpGet]
         public IActionResult Register()
@@ -152,6 +160,35 @@ namespace DoubtSolvingForum.Controllers
                     ModelState.AddModelError("", "Something Went Wrong");
             }
             return View(model);
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpGet]
+        public IActionResult AdminDashboard(string notification)
+        {
+            var model = new AdminDashboardViewModel();
+            model.Users = userManager.Users;
+            model.Questions = questionRepository.GetQuestions();
+            model.Answers = answerRepository.GetAnswers();
+            model.Votes = answerRepository.GetVotes();
+            if (notification != null)
+                ViewBag.notification = notification;
+            return View(model);
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if(user != null)
+                await userManager.DeleteAsync(user);
+            return RedirectToAction("AdminDashboard",new { notification = "User Deleted Successfully"});
         }
     }
 }

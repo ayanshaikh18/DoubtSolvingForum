@@ -1,59 +1,77 @@
 ﻿@model DoubtSolvingForum.ViewModels.RegisterViewModel
-<br /><br />
+@section HeadContent
+{
+    <style>
+        @@media (max-width: 768px) {
+            .card {
+                width: 100% !important;
+            }
+        }
+    </style>
+}
+<br />
 <div class="row mt-5">
     <div class="col-sm-12 col-md-3"></div>
-    <div class="col-sm-12 col-md-6">
-        <div class="card shadow">
-            <div class="card-body">
-                <div class="text-center h4 font-weight-bold card-title">
-                    Sign Up
-                </div>
-                <form method="post">
-                    <div class="">
-                        <div class="text-danger text-center">
-                            <div class="font-weight-bold" asp-validation-summary="All">
-                            </div>
-                        </div>
-                        <div class="input-group flex-nowrap">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">email</i>
-                            </div>
-                            <input required asp-for="Email" placeholder="Enter Email" class="form-control">
-                            <div asp-validation-for="Email" class="text-danger"></div>
-                        </div>
-                        <div class="input-group flex-nowrap mt-4">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">account_circle</i>
-                            </div>
-                            <input required asp-for="Username" placeholder="Username" class="form-control">
-                            <div asp-validation-for="Username" class="text-danger"></div>
-                        </div>
-                        <div class="input-group flex-nowrap mt-4">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">lock_outline</i>
-                            </div>
-                            <input required asp-for="Password" placeholder="Password" class="form-control">
-                            <div asp-validation-for="Password" class="text-danger"></div>
-                        </div>
-                        <div class="input-group flex-nowrap mt-4">
-                            <div class="input-group-text">
-                                <i class="material-icons prefix">lock</i>
-                            </div>
-                            <input placeholder="Confirm Password" required asp-for="ConfirmPassword" class="form-control">
-                            <div asp-validation-for="ConfirmPassword" class="text-danger"></div>
-                        </div>
-                        <div class="text-center mt-4">
-                            <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"
-                                    type="submit" name="action">
-                                Register
-                            </button>
-                        </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="card shadow w-75 mx-auto">
+            <div class="card-body row">
+                <div class="d-none d-lg-block col-lg-6">
+                    <div class="flex-grow-1 bg-login-image">
+                        <img src="~/images/image2.jpg" style="height:100%;width:100%" class="mt-3 p-3 img-fluid">
                     </div>
-                </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center h4 font-weight-bold card-title">
+                        Sign Up
+                    </div>
+                    <form method="post">
+                        <div class="">
+                            <div class="text-danger text-center">
+                                <div class="font-weight-bold" asp-validation-summary="All">
+                                </div>
+                            </div>
+                            <div class="input-group flex-nowrap">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">email</i>
+                                </div>
+                                <input required asp-for="Email" placeholder="Enter Email" class="form-control">
+                                <div asp-validation-for="Email" class="text-danger"></div>
+                            </div>
+                            <div class="input-group flex-nowrap mt-4">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">account_circle</i>
+                                </div>
+                                <input required asp-for="Username" placeholder="Username" class="form-control">
+                                <div asp-validation-for="Username" class="text-danger"></div>
+                            </div>
+                            <div class="input-group flex-nowrap mt-4">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">lock_outline</i>
+                                </div>
+                                <input required asp-for="Password" placeholder="Password" class="form-control">
+                                <div asp-validation-for="Password" class="text-danger"></div>
+                            </div>
+                            <div class="input-group flex-nowrap mt-4">
+                                <div class="input-group-text">
+                                    <i class="material-icons prefix">lock</i>
+                                </div>
+                                <input placeholder="Confirm Password" required asp-for="ConfirmPassword" class="form-control">
+                                <div asp-validation-for="ConfirmPassword" class="text-danger"></div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="black btn-dark btn btn-block darken-2 btn waves-effect waves-light center"
+                                        type="submit" name="action">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>
     </div>
     <div class="-sm-12 -md-3 col-sm-12 col-md-3"></div>
 </div>
-<br /><br />
+<br />
+<br />

@@ -11,19 +11,23 @@
         body {
             background: #f3f3f3;
         }
+
         .nav-item {
             padding: 5px;
         }
-        .nav-item:hover {
-            background-color: black;
-            border-radius: 20px;
-        }
+
+            .nav-item:hover {
+                background-color: black;
+                border-radius: 20px;
+            }
+
         .nav-link {
             color: black !important;
         }
-        .nav-link:hover {
-            color: white !important;
-        }
+
+            .nav-link:hover {
+                color: white !important;
+            }
     </style>
     @RenderSection("HeadContent", required: false)
 </head>
@@ -46,9 +50,19 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="question" asp-action="list"><i class="fa fa-home"></i> &nbsp;Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="question" asp-action="list" asp-route-myQuestions="true"><i class="fa fa-question"></i> &nbsp;My Questions</a>
-                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="AdminDashboard"><i class="fa fa-user-circle"></i> &nbsp;Admin Dashboard</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="question" asp-action="list" asp-route-myQuestions="true"><i class="fa fa-question"></i> &nbsp;My Questions</a>
+                        </li>
+
+                    }
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="feedback" asp-action="list"><i class="fa fa-comments"></i> &nbsp;Feedbacks</a>
                     </li>
@@ -75,10 +89,10 @@
                 {
 
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><i class="fa fa-user-circle"></i> &nbsp;Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Register"><i class="fa fa-user-circle-o"></i> &nbsp;Sign Up</a>
                     </li>
                 }
             </ul>

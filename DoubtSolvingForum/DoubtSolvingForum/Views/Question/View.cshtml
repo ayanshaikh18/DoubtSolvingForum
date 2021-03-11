@@ -39,7 +39,7 @@
                     Asked By :- @Model.Question.User.UserName
                 </div>
             </div>
-            @if (Model.Question.UserId == Model.UserId || Model.IsAdmin)
+            @if (Model.Question.UserId == Model.UserId)
             {
                 <div style="text-align:right" class="col-sm-12">
                     <a asp-action="edit" asp-controller="question" class="btn btn-secondary"
@@ -128,7 +128,7 @@
                 <div class="p-2 col-sm-11 col-md-11">
                     @Markdown.ParseHtmlString(answer.AnswerText)
                     
-                    @if (answer.UserId == Model.UserId || Model.IsAdmin) 
+                    @if (answer.UserId == Model.UserId) 
                     {
                         <a asp-action="EditAnswer" asp-route-id="@answer.Id">Edit Answer</a> <text>|</text>
                         <a href="#" class="deleteBtn" ansId="@answer.Id" data-toggle="modal" data-target="#deleteAnsModal">Delete Answer</a>
@@ -173,7 +173,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="float-left" asp-action="DeleteAnswer" method="post" id="deleteAnsForm">
+                <form class="float-left" asp-action="DeleteUser" method="post" id="deleteAnsForm">
                     <input type="hidden" name="id" id="ansId" />
                     Are You sure you want to delete Your answer ?
                 </form>

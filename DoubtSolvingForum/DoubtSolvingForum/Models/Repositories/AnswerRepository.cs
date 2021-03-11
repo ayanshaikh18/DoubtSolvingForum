@@ -58,6 +58,24 @@ namespace DoubtSolvingForum.Models.Repositories
             return answers.ToList();
         }
 
+        public IEnumerable<Answer> GetAnswers()
+        {
+            var answers = context.Answers.Select(a => new Answer()
+            {
+                Id = a.Id,
+                AnswerText = a.AnswerText,
+                QuestionId = a.QuestionId,
+                UserId = a.UserId,
+                Votes = context.Votes.Where(vote => vote.AnswerId == a.Id).ToList()
+            });
+            return answers.ToList();
+        }
+
+        public IEnumerable<Vote> GetVotes()
+        {
+            return context.Votes.ToList();
+        }
+
         public Answer Update(Answer answer)
         {
             var ans = context.Answers.Attach(answer);
