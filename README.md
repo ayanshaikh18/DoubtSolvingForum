@@ -1,4 +1,4 @@
-# DoubtSolvingForum
+# QnA - A Doubt Solving Forum
 This is an online doubt solving forum web application for people related to CSE field. Users can post the Questions regarding their doubts, erros or issues and can get answers from other users of the system
 
 ## Main features of the application 
