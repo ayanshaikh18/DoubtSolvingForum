@@ -1,4 +1,5 @@
 ﻿
+
 using DoubtSolvingForum.Models;
 using DoubtSolvingForum.Models.Repositories;
 using DoubtSolvingForum.Utilities;
@@ -73,7 +74,7 @@ namespace DoubtSolvingForum.Controllers
             {
                 ViewBag.notification = notification;
             }
-            int pageSize = 5;
+            int pageSize = 8;
             return View(PaginatedList<Question>.Create(fetchedQuestions ,pageNumber ?? 1, pageSize));
         }
 
